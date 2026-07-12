@@ -1,7 +1,3 @@
-/* Nova Toolbox — translations.js
-   Every user-facing string lives here, keyed by a dot-namespaced id.
-   No text is hard-coded in index.html; script.js looks strings up via t(key). */
-
 const TRANSLATIONS = {
   en: {
     "app.name": "Nova Toolbox",
@@ -63,7 +59,6 @@ const TRANSLATIONS = {
     "toast.downloaded": "File downloaded",
     "toast.langChanged": "Language changed",
 
-    /* Password Generator */
     "tool.password.title": "Password Generator",
     "tool.password.desc": "Create strong, random passwords with custom length and character sets.",
     "tool.password.length": "Length",
@@ -79,7 +74,6 @@ const TRANSLATIONS = {
     "tool.password.strength.veryStrong": "Very strong",
     "tool.password.needOneType": "Select at least one character type",
 
-    /* Random Name Generator */
     "tool.names.title": "Random Name Generator",
     "tool.names.desc": "Generate random first and last name combinations.",
     "tool.names.count": "How many names",
@@ -88,20 +82,17 @@ const TRANSLATIONS = {
     "tool.names.gender.feminine": "Feminine",
     "tool.names.gender.masculine": "Masculine",
 
-    /* UUID Generator */
     "tool.uuid.title": "UUID Generator",
     "tool.uuid.desc": "Generate RFC 4122 version 4 UUIDs.",
     "tool.uuid.count": "How many UUIDs",
     "tool.uuid.uppercase": "Uppercase",
     "tool.uuid.hyphens": "Include hyphens",
 
-    /* Hash Generator */
     "tool.hash.title": "Hash Generator",
     "tool.hash.desc": "Compute SHA-1, SHA-256 or SHA-512 hashes of any text.",
     "tool.hash.input": "Text to hash",
     "tool.hash.algorithm": "Algorithm",
 
-    /* JSON Formatter */
     "tool.jsonFormat.title": "JSON Formatter",
     "tool.jsonFormat.desc": "Pretty-print and validate JSON with adjustable indentation.",
     "tool.jsonFormat.input": "JSON input",
@@ -110,14 +101,12 @@ const TRANSLATIONS = {
     "tool.jsonFormat.valid": "Valid JSON",
     "tool.jsonFormat.invalid": "Invalid JSON: {error}",
 
-    /* JSON Minifier */
     "tool.jsonMin.title": "JSON Minifier",
     "tool.jsonMin.desc": "Strip whitespace from JSON to make it as small as possible.",
     "tool.jsonMin.input": "JSON input",
     "tool.jsonMin.output": "Minified output",
     "tool.jsonMin.savings": "{percent}% smaller ({before} → {after} bytes)",
 
-    /* Base64 Encoder / Decoder */
     "tool.b64encode.title": "Base64 Encoder",
     "tool.b64encode.desc": "Encode plain text into Base64.",
     "tool.b64decode.title": "Base64 Decoder",
@@ -126,7 +115,6 @@ const TRANSLATIONS = {
     "tool.b64.output": "Output",
     "tool.b64.invalid": "This isn't valid Base64",
 
-    /* Unix Timestamp Converter */
     "tool.timestamp.title": "Unix Timestamp Converter",
     "tool.timestamp.desc": "Convert between Unix timestamps and human-readable dates.",
     "tool.timestamp.now": "Current timestamp",
@@ -139,7 +127,6 @@ const TRANSLATIONS = {
     "tool.timestamp.utcTime": "UTC time",
     "tool.timestamp.useNow": "Use current time",
 
-    /* Text to Binary */
     "tool.binary.title": "Text to Binary Converter",
     "tool.binary.desc": "Convert text to binary and back.",
     "tool.binary.text": "Text",
@@ -147,7 +134,6 @@ const TRANSLATIONS = {
     "tool.binary.direction.toBinary": "Text → Binary",
     "tool.binary.direction.toText": "Binary → Text",
 
-    /* Text to Morse */
     "tool.morse.title": "Text to Morse Converter",
     "tool.morse.desc": "Convert text to Morse code and back.",
     "tool.morse.text": "Text",
@@ -156,13 +142,11 @@ const TRANSLATIONS = {
     "tool.morse.direction.toText": "Morse → Text",
     "tool.morse.playSound": "Play sound",
 
-    /* Color Picker */
     "tool.colorPicker.title": "Color Picker",
     "tool.colorPicker.desc": "Pick a color and get it instantly in HEX, RGB and HSL.",
     "tool.colorPicker.pick": "Pick a color",
     "tool.colorPicker.recent": "Recently used",
 
-    /* Color Converter */
     "tool.colorConvert.title": "HEX ↔ RGB ↔ HSL Converter",
     "tool.colorConvert.desc": "Convert colors between HEX, RGB and HSL formats.",
     "tool.colorConvert.hex": "HEX",
@@ -170,7 +154,6 @@ const TRANSLATIONS = {
     "tool.colorConvert.hsl": "HSL",
     "tool.colorConvert.invalid": "Enter a valid color value",
 
-    /* Gradient Generator */
     "tool.gradient.title": "CSS Gradient Generator",
     "tool.gradient.desc": "Design linear or radial gradients and copy the CSS.",
     "tool.gradient.type": "Type",
@@ -181,7 +164,6 @@ const TRANSLATIONS = {
     "tool.gradient.colorEnd": "End color",
     "tool.gradient.css": "CSS",
 
-    /* Box Shadow Generator */
     "tool.shadow.title": "CSS Box Shadow Generator",
     "tool.shadow.desc": "Design a box-shadow visually and copy the CSS.",
     "tool.shadow.offsetX": "Horizontal offset",
@@ -192,7 +174,6 @@ const TRANSLATIONS = {
     "tool.shadow.inset": "Inset",
     "tool.shadow.css": "CSS",
 
-    /* Font Pairing */
     "tool.fonts.title": "Font Pairing Tool",
     "tool.fonts.desc": "Preview curated heading and body font pairings.",
     "tool.fonts.heading": "Heading font",
@@ -201,7 +182,6 @@ const TRANSLATIONS = {
     "tool.fonts.previewBody": "Jumps over the lazy dog. Pack my box with five dozen liquor jugs — this preview shows how paragraph text will read with this pairing.",
     "tool.fonts.css": "CSS",
 
-    /* Image Resize */
     "tool.imgResize.title": "Image Resize Tool",
     "tool.imgResize.desc": "Resize an image in your browser and download the result.",
     "tool.imgResize.width": "Width (px)",
@@ -209,32 +189,27 @@ const TRANSLATIONS = {
     "tool.imgResize.keepRatio": "Keep aspect ratio",
     "tool.imgResize.noImage": "Upload an image to get started",
 
-    /* Image Compressor */
     "tool.imgCompress.title": "Image Compressor",
     "tool.imgCompress.desc": "Reduce image file size by adjusting JPEG quality.",
     "tool.imgCompress.quality": "Quality",
     "tool.imgCompress.originalSize": "Original: {size}",
     "tool.imgCompress.compressedSize": "Compressed: {size}",
 
-    /* Image to Base64 */
     "tool.imgB64.title": "Image to Base64 Converter",
     "tool.imgB64.desc": "Convert an image into a Base64 data URI.",
     "tool.imgB64.output": "Data URI",
 
-    /* Favicon Generator */
     "tool.favicon.title": "Favicon Generator",
     "tool.favicon.desc": "Generate favicon PNGs in common sizes from any image.",
     "tool.favicon.sizes": "Sizes generated",
     "tool.favicon.downloadAll": "Download all as ZIP-free PNGs",
     "tool.favicon.downloadOne": "Download {size}",
 
-    /* Markdown Editor */
     "tool.markdown.title": "Markdown Editor + Preview",
     "tool.markdown.desc": "Write Markdown with a live rendered preview.",
     "tool.markdown.editor": "Markdown",
     "tool.markdown.preview": "Preview",
 
-    /* Word Counter */
     "tool.wordCount.title": "Word Counter",
     "tool.wordCount.desc": "Count words, sentences and paragraphs in your text.",
     "tool.wordCount.words": "Words",
@@ -243,7 +218,6 @@ const TRANSLATIONS = {
     "tool.wordCount.readingTime": "Reading time",
     "tool.wordCount.minutes": "{count} min",
 
-    /* Character Counter */
     "tool.charCount.title": "Character Counter",
     "tool.charCount.desc": "Count characters, with and without spaces.",
     "tool.charCount.withSpaces": "With spaces",
@@ -252,7 +226,6 @@ const TRANSLATIONS = {
     "tool.charCount.remaining": "{count} remaining",
     "tool.charCount.overLimit": "{count} over limit",
 
-    /* Lorem Ipsum */
     "tool.lorem.title": "Lorem Ipsum Generator",
     "tool.lorem.desc": "Generate placeholder text by paragraphs, sentences or words.",
     "tool.lorem.unit": "Unit",
@@ -262,7 +235,6 @@ const TRANSLATIONS = {
     "tool.lorem.count": "Amount",
     "tool.lorem.startClassic": "Start with \"Lorem ipsum…\"",
 
-    /* Text Case Converter */
     "tool.textCase.title": "Text Case Converter",
     "tool.textCase.desc": "Convert text to UPPERCASE, lowercase or Capitalized Case.",
     "tool.textCase.input": "Input",
@@ -270,7 +242,6 @@ const TRANSLATIONS = {
     "tool.textCase.lower": "lowercase",
     "tool.textCase.capitalize": "Capitalize Case",
 
-    /* Find and Replace */
     "tool.findReplace.title": "Find and Replace",
     "tool.findReplace.desc": "Find and replace text, with optional case sensitivity and whole-word matching.",
     "tool.findReplace.text": "Text",
@@ -280,27 +251,23 @@ const TRANSLATIONS = {
     "tool.findReplace.wholeWord": "Whole word only",
     "tool.findReplace.matches": "{count} matches",
 
-    /* HTML Escape */
     "tool.htmlEscape.title": "HTML Escape / Unescape",
     "tool.htmlEscape.desc": "Escape HTML entities or unescape them back to raw HTML.",
     "tool.htmlEscape.input": "Input",
     "tool.htmlEscape.output": "Output",
 
-    /* CSS Minifier */
     "tool.cssMin.title": "CSS Minifier",
     "tool.cssMin.desc": "Compress CSS by removing whitespace and comments.",
     "tool.cssMin.input": "CSS input",
     "tool.cssMin.output": "Minified output",
     "tool.cssMin.savings": "{percent}% smaller ({before} → {after} bytes)",
 
-    /* JS Formatter */
     "tool.jsFormat.title": "JavaScript Formatter",
     "tool.jsFormat.desc": "Reformat JavaScript with consistent indentation.",
     "tool.jsFormat.input": "JavaScript input",
     "tool.jsFormat.output": "Formatted output",
     "tool.jsFormat.indent": "Indent size",
 
-    /* Regex Tester */
     "tool.regex.title": "Regex Tester",
     "tool.regex.desc": "Test regular expressions against sample text with live match highlighting.",
     "tool.regex.pattern": "Pattern",
@@ -310,7 +277,6 @@ const TRANSLATIONS = {
     "tool.regex.noMatches": "No matches",
     "tool.regex.invalid": "Invalid regular expression: {error}",
 
-    /* REST API Tester */
     "tool.apiTester.title": "REST API Tester",
     "tool.apiTester.desc": "Send HTTP requests and inspect the response, right in your browser.",
     "tool.apiTester.method": "Method",

@@ -1,15 +1,5 @@
-/* ============================================================
-   Nova Toolbox — script.js
-   App shell (navigation, search, favorites, language) plus
-   every individual tool's logic. No frameworks, no build step.
-   ============================================================ */
-
 "use strict";
 
-/* ---------------------------------------------------------
-   Tool registry — metadata only. Rendering logic lives in
-   the RENDERERS object further down, keyed by tool id.
-   --------------------------------------------------------- */
 const TOOLS = [
   { id: "password", category: "generators", icon: "🔑" },
   { id: "names", category: "generators", icon: "🧑‍🤝‍🧑" },
@@ -51,9 +41,6 @@ const TOOLS = [
 
 const CATEGORIES = ["generators", "converters", "design", "image", "text", "dev"];
 
-/* ---------------------------------------------------------
-   State
-   --------------------------------------------------------- */
 const state = {
   lang: localStorage.getItem("nova_language") || "en",
   favorites: new Set(JSON.parse(localStorage.getItem("nova_favorites") || "[]")),
@@ -62,9 +49,6 @@ const state = {
   openToolId: null
 };
 
-/* ---------------------------------------------------------
-   i18n helpers
-   --------------------------------------------------------- */
 function t(key, params) {
   const dict = TRANSLATIONS[state.lang] || TRANSLATIONS.en;
   let str = dict[key] ?? TRANSLATIONS.en[key] ?? key;
@@ -107,9 +91,6 @@ function setLanguage(lang) {
   toast(t("toast.langChanged"));
 }
 
-/* ---------------------------------------------------------
-   Toast
-   --------------------------------------------------------- */
 let toastTimer = null;
 function toast(message) {
   const el = document.getElementById("toast");
@@ -119,9 +100,6 @@ function toast(message) {
   toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
 }
 
-/* ---------------------------------------------------------
-   Small utilities
-   --------------------------------------------------------- */
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, "&amp;")
@@ -184,9 +162,6 @@ function addCopyHandler(container, buttonSelector, getText) {
   if (btn) btn.addEventListener("click", () => copyToClipboard(getText()));
 }
 
-/* ===========================================================
-   NAVIGATION: sidebar, chips, search, grid, favorites
-   =========================================================== */
 
 function renderSidebarCategories() {
   CATEGORIES.forEach((cat) => {
@@ -317,9 +292,6 @@ function toggleFavorite(toolId) {
   }
 }
 
-/* ---------------------------------------------------------
-   Sidebar open/close
-   --------------------------------------------------------- */
 function openSidebar() {
   document.getElementById("sidebar").classList.add("open");
   document.getElementById("overlay").classList.add("show");
@@ -329,9 +301,6 @@ function closeSidebar() {
   if (!state.openToolId) document.getElementById("overlay").classList.remove("show");
 }
 
-/* ---------------------------------------------------------
-   Tool panel open/close
-   --------------------------------------------------------- */
 function openTool(toolId, silentRerender) {
   const tool = TOOLS.find((tl) => tl.id === toolId);
   if (!tool) return;
@@ -368,12 +337,8 @@ function closeTool() {
   }
 }
 
-/* ===========================================================
-   TOOL RENDERERS
-   =========================================================== */
 const RENDERERS = {};
 
-/* ---------- 1. Password Generator ---------- */
 RENDERERS.password = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -472,7 +437,6 @@ RENDERERS.password = (c) => {
   generate();
 };
 
-/* ---------- 2. Random Name Generator ---------- */
 RENDERERS.names = (c) => {
   const FIRST_F = ["Emma", "Olivia", "Ava", "Sophia", "Isabella", "Mia", "Amelia", "Luna", "Aria", "Zoe", "Nora", "Hazel", "Elena", "Nova", "Ivy"];
   const FIRST_M = ["Liam", "Noah", "Oliver", "Elijah", "James", "Lucas", "Henry", "Leo", "Owen", "Ethan", "Gabriel", "Julian", "Milo", "Dean", "Axel"];
@@ -520,7 +484,6 @@ RENDERERS.names = (c) => {
   generate();
 };
 
-/* ---------- 3. UUID Generator ---------- */
 RENDERERS.uuid = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -564,7 +527,6 @@ RENDERERS.uuid = (c) => {
   generate();
 };
 
-/* ---------- 4. Hash Generator ---------- */
 RENDERERS.hash = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -604,7 +566,6 @@ RENDERERS.hash = (c) => {
   addCopyHandler(c, "#hashCopy", () => c.querySelector("#hashOutput").textContent);
 };
 
-/* ---------- 5. JSON Formatter ---------- */
 RENDERERS.jsonFormat = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -658,7 +619,6 @@ RENDERERS.jsonFormat = (c) => {
   addCopyHandler(c, "#jfCopy", () => c.querySelector("#jfOutput").textContent);
 };
 
-/* ---------- 6. JSON Minifier ---------- */
 RENDERERS.jsonMin = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -706,7 +666,6 @@ RENDERERS.jsonMin = (c) => {
   addCopyHandler(c, "#jmCopy", () => c.querySelector("#jmOutput").textContent);
 };
 
-/* ---------- 7 & 8. Base64 Encode / Decode ---------- */
 function base64Renderer(mode) {
   return (c) => {
     const encoding = mode === "encode";
@@ -759,7 +718,6 @@ function base64Renderer(mode) {
 RENDERERS.b64encode = base64Renderer("encode");
 RENDERERS.b64decode = base64Renderer("decode");
 
-/* ---------- 9. Unix Timestamp Converter ---------- */
 RENDERERS.timestamp = (c) => {
   const now = Date.now();
   c.innerHTML = `
@@ -826,7 +784,6 @@ RENDERERS.timestamp = (c) => {
   toDate();
 };
 
-/* ---------- 10. Text to Binary ---------- */
 RENDERERS.binary = (c) => {
   c.innerHTML = `
     <div class="tabs" id="binTabs">
@@ -887,7 +844,6 @@ RENDERERS.binary = (c) => {
   addCopyHandler(c, "#binCopy", () => c.querySelector("#binOutput").textContent);
 };
 
-/* ---------- 11. Text to Morse ---------- */
 const MORSE_MAP = {
   A: ".-", B: "-...", C: "-.-.", D: "-..", E: ".", F: "..-.", G: "--.", H: "....",
   I: "..", J: ".---", K: "-.-", L: ".-..", M: "--", N: "-.", O: "---", P: ".--.",
@@ -990,7 +946,6 @@ RENDERERS.morse = (c) => {
   addCopyHandler(c, "#morseCopy", () => c.querySelector("#morseOutput").textContent);
 };
 
-/* ---------- 12. Color Picker ---------- */
 RENDERERS.colorPicker = (c) => {
   const recent = JSON.parse(localStorage.getItem("nova_recent_colors") || "[]");
   c.innerHTML = `
@@ -1073,7 +1028,6 @@ RENDERERS.colorPicker = (c) => {
   update(false);
 };
 
-/* ---------- 13. HEX/RGB/HSL Converter ---------- */
 RENDERERS.colorConvert = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -1165,7 +1119,6 @@ RENDERERS.colorConvert = (c) => {
   apply({ r: 83, g: 213, b: 255 });
 };
 
-/* ---------- 14. CSS Gradient Generator ---------- */
 RENDERERS.gradient = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -1218,7 +1171,6 @@ RENDERERS.gradient = (c) => {
   run();
 };
 
-/* ---------- 15. CSS Box Shadow Generator ---------- */
 RENDERERS.shadow = (c) => {
   c.innerHTML = `
     <div class="shadow-preview-wrap"><div class="shadow-preview-box" id="shBox"></div></div>
@@ -1264,7 +1216,6 @@ RENDERERS.shadow = (c) => {
   run();
 };
 
-/* ---------- 16. Font Pairing Tool ---------- */
 RENDERERS.fonts = (c) => {
   const PAIRS = [
     { heading: "Georgia, 'Times New Roman', serif", body: "Verdana, Arial, sans-serif", name: "Georgia + Verdana" },
@@ -1304,7 +1255,6 @@ RENDERERS.fonts = (c) => {
   run();
 };
 
-/* ---------- Shared: image upload helper ---------- */
 function buildImageUploader(c, onLoad, dropZoneLabel) {
   const wrap = document.createElement("div");
   wrap.innerHTML = `
@@ -1331,7 +1281,6 @@ function buildImageUploader(c, onLoad, dropZoneLabel) {
   return wrap;
 }
 
-/* ---------- 17. Image Resize Tool ---------- */
 RENDERERS.imgResize = (c) => {
   c.innerHTML = `
     <div id="irUploaderSlot"></div>
@@ -1389,7 +1338,6 @@ RENDERERS.imgResize = (c) => {
   });
 };
 
-/* ---------- 18. Image Compressor ---------- */
 RENDERERS.imgCompress = (c) => {
   c.innerHTML = `
     <div id="icUploaderSlot"></div>
@@ -1446,7 +1394,6 @@ RENDERERS.imgCompress = (c) => {
   c.querySelector("#icQuality").addEventListener("input", debounce(run, 150));
 };
 
-/* ---------- 19. Image to Base64 ---------- */
 RENDERERS.imgB64 = (c) => {
   c.innerHTML = `
     <div id="ibUploaderSlot"></div>
@@ -1468,7 +1415,6 @@ RENDERERS.imgB64 = (c) => {
   addCopyHandler(c, "#ibCopy", () => c.querySelector("#ibOutput").textContent);
 };
 
-/* ---------- 20. Favicon Generator ---------- */
 RENDERERS.favicon = (c) => {
   const SIZES = [16, 32, 48, 180, 192, 512];
   c.innerHTML = `
@@ -1505,7 +1451,6 @@ RENDERERS.favicon = (c) => {
   c.querySelector("#fvUploaderSlot").appendChild(uploader);
 };
 
-/* ---------- 21. Markdown Editor + Preview ---------- */
 function renderMarkdown(src) {
   let html = escapeHtml(src);
   html = html.replace(/```([\s\S]*?)```/g, (m, code) => `<pre><code>${code}</code></pre>`);
@@ -1555,7 +1500,6 @@ RENDERERS.markdown = (c) => {
   run();
 };
 
-/* ---------- 22. Word Counter ---------- */
 RENDERERS.wordCount = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -1582,7 +1526,6 @@ RENDERERS.wordCount = (c) => {
   run();
 };
 
-/* ---------- 23. Character Counter ---------- */
 RENDERERS.charCount = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -1617,7 +1560,6 @@ RENDERERS.charCount = (c) => {
   run();
 };
 
-/* ---------- 24. Lorem Ipsum Generator ---------- */
 RENDERERS.lorem = (c) => {
   const WORDS = "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat".split(" ");
 
@@ -1684,7 +1626,6 @@ RENDERERS.lorem = (c) => {
   generate();
 };
 
-/* ---------- 25. Text Case Converter ---------- */
 RENDERERS.textCase = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -1716,7 +1657,6 @@ RENDERERS.textCase = (c) => {
   addCopyHandler(c, "#tcCopy", () => c.querySelector("#tcOutput").textContent);
 };
 
-/* ---------- 26. Find and Replace ---------- */
 RENDERERS.findReplace = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -1772,7 +1712,6 @@ RENDERERS.findReplace = (c) => {
   addCopyHandler(c, "#frCopy", () => c.querySelector("#frOutput").textContent);
 };
 
-/* ---------- 27. HTML Escape / Unescape ---------- */
 RENDERERS.htmlEscape = (c) => {
   c.innerHTML = `
     <div class="tabs" id="heTabs">
@@ -1811,7 +1750,6 @@ RENDERERS.htmlEscape = (c) => {
   addCopyHandler(c, "#heCopy", () => c.querySelector("#heOutput").textContent);
 };
 
-/* ---------- 28. CSS Minifier ---------- */
 RENDERERS.cssMin = (c) => {
   c.innerHTML = `
     <div class="field">
@@ -1854,7 +1792,6 @@ RENDERERS.cssMin = (c) => {
   addCopyHandler(c, "#cmCopy", () => c.querySelector("#cmOutput").textContent);
 };
 
-/* ---------- 29. JavaScript Formatter ---------- */
 function formatJs(code, indentSize) {
   const indentStr = " ".repeat(indentSize);
   let result = "";
@@ -1957,7 +1894,6 @@ RENDERERS.jsFormat = (c) => {
   addCopyHandler(c, "#jsCopy", () => c.querySelector("#jsOutput").textContent);
 };
 
-/* ---------- 30. Regex Tester ---------- */
 RENDERERS.regex = (c) => {
   c.innerHTML = `
     <div class="field-row">
@@ -2015,7 +1951,6 @@ RENDERERS.regex = (c) => {
   c.querySelector("#rxText").addEventListener("input", debounce(run, 150));
 };
 
-/* ---------- 31. REST API Tester ---------- */
 RENDERERS.apiTester = (c) => {
   c.innerHTML = `
     <div class="url-row">
@@ -2083,7 +2018,7 @@ RENDERERS.apiTester = (c) => {
       const elapsed = Math.round(performance.now() - started);
       const text = await res.text();
       let pretty = text;
-      try { pretty = JSON.stringify(JSON.parse(text), null, 2); } catch (e) { /* not json, leave as-is */ }
+      try { pretty = JSON.stringify(JSON.parse(text), null, 2); } catch (e) {  }
 
       meta.innerHTML = `
         <div class="stat-box"><strong>${res.status}</strong><span>${t("tool.apiTester.status")}</span></div>
@@ -2097,9 +2032,6 @@ RENDERERS.apiTester = (c) => {
   });
 };
 
-/* ===========================================================
-   INIT
-   =========================================================== */
 function init() {
   document.documentElement.lang = state.lang;
   applyTranslations();

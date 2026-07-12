@@ -1,11 +1,3 @@
-/* ============================================================
-   Nova Toolbox — styles.css
-   Visual language adapted from the Nova Radio project reference:
-   same dark palette, card-based layout, pill controls and the
-   bottom sheet pattern — reworked here for a utility toolbox
-   with search, categories, favorites and 31 individual tools.
-   ============================================================ */
-
 :root {
   color-scheme: dark;
   --bg: #0b0e14;
@@ -89,7 +81,6 @@ a:focus-visible,
   padding: 16px 16px 80px;
 }
 
-/* ---------- Overlay & Sidebar ---------- */
 
 .overlay {
   position: fixed;
@@ -228,7 +219,6 @@ a:focus-visible,
   margin: 0;
 }
 
-/* ---------- Header ---------- */
 
 .header {
   padding: 6px 0 18px;
@@ -262,7 +252,6 @@ a:focus-visible,
   letter-spacing: 0.03em;
 }
 
-/* ---------- Search & filters ---------- */
 
 .search-panel {
   border-top: 1px solid var(--border);
@@ -306,7 +295,6 @@ a:focus-visible,
   font-weight: 600;
 }
 
-/* ---------- Sections & results ---------- */
 
 .stations {
   border-top: 1px solid var(--border);
@@ -342,7 +330,6 @@ a:focus-visible,
   display: none;
 }
 
-/* ---------- Tool grid & cards ---------- */
 
 .tool-grid {
   display: grid;
@@ -421,7 +408,6 @@ a:focus-visible,
   display: none;
 }
 
-/* ---------- Footer ---------- */
 
 .app-footer {
   text-align: center;
@@ -430,7 +416,6 @@ a:focus-visible,
   margin-top: 30px;
 }
 
-/* ---------- Tool panel (bottom sheet) ---------- */
 
 .player-sheet.tool-panel {
   position: fixed;
@@ -526,7 +511,6 @@ a:focus-visible,
   padding-bottom: 10px;
 }
 
-/* ---------- Tool form primitives ---------- */
 
 .field {
   display: flex;
@@ -951,7 +935,6 @@ select option {
   font-size: 12px;
 }
 
-/* ---------- Toast ---------- */
 
 .toast {
   position: fixed;
@@ -979,7 +962,6 @@ select option {
   transform: translate(-50%, 0);
 }
 
-/* ---------- Responsive ---------- */
 
 @media (max-width: 700px) {
   .app {
