@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Nova Toolbox</title>
+<meta name="description" content="A fast, offline-capable toolbox of everyday web utilities." />
+<meta name="theme-color" content="#0b0e14" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icon-192.png" />
+<link rel="apple-touch-icon" href="icon-192.png" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <div class="sidebar-header">
+    <h2 data-i18n="nav.title">Nova Toolbox</h2>
+    <button class="sidebar-close" id="sidebarClose" aria-label="Close menu" data-i18n-aria="app.close">✕</button>
+  </div>
+  <div class="sidebar-content">
+
+    <div class="menu-group">
+      <h3 data-i18n="category.generators">Generators</h3>
+      <nav class="category-list" data-category="generators"></nav>
+    </div>
+    <div class="menu-group">
+      <h3 data-i18n="category.converters">Converters</h3>
+      <nav class="category-list" data-category="converters"></nav>
+    </div>
+    <div class="menu-group">
+      <h3 data-i18n="category.design">Design tools</h3>
+      <nav class="category-list" data-category="design"></nav>
+    </div>
+    <div class="menu-group">
+      <h3 data-i18n="category.image">Image tools</h3>
+      <nav class="category-list" data-category="image"></nav>
+    </div>
+    <div class="menu-group">
+      <h3 data-i18n="category.text">Text tools</h3>
+      <nav class="category-list" data-category="text"></nav>
+    </div>
+    <div class="menu-group">
+      <h3 data-i18n="category.dev">Developer tools</h3>
+      <nav class="category-list" data-category="dev"></nav>
+    </div>
+
+    <div class="menu-group">
+      <h3 data-i18n="nav.language">Language</h3>
+      <div class="language-buttons">
+        <button class="language-button" data-lang="en">English</button>
+        <button class="language-button" data-lang="hu">Magyar</button>
+      </div>
+    </div>
+
+    <div class="menu-group">
+      <h3 data-i18n="nav.about">About</h3>
+      <p class="about-text" data-i18n="nav.aboutText"></p>
+    </div>
+
+    <div class="menu-group install-group hidden" id="installGroup">
+      <h3 data-i18n="nav.install">Install app</h3>
+      <p class="about-text" data-i18n="nav.installHint"></p>
+      <button class="language-button" id="installButton" data-i18n="nav.install">Install app</button>
+    </div>
+
+  </div>
+</aside>
+
+<div class="app">
+
+  <header class="header">
+    <div class="top-bar">
+      <button class="menu-button" id="menuButton" aria-label="Open menu" data-i18n-aria="app.menu">☰</button>
+      <h1 data-i18n="app.name">Nova Toolbox</h1>
+      <button class="menu-button" id="langButton" aria-label="Change language">EN</button>
+    </div>
+    <p data-i18n="app.tagline"></p>
+  </header>
+
+  <section class="search-panel">
+    <div class="search-row">
+      <input type="search" id="searchInput" data-i18n-placeholder="search.placeholder" autocomplete="off" aria-label="Search tools" />
+    </div>
+    <div class="filter-row" id="categoryChips" role="tablist"></div>
+  </section>
+
+  <section class="stations favorites-section" id="favoritesSection">
+    <div class="section-header">
+      <h2 data-i18n="nav.favorites">Favorites</h2>
+    </div>
+    <div class="tool-grid" id="favoritesGrid"></div>
+    <p class="empty-hint hidden" id="favoritesEmpty" data-i18n="favorites.empty"></p>
+  </section>
+
+  <section class="stations">
+    <div class="section-header">
+      <h2 id="resultsHeading" data-i18n="nav.allTools">All tools</h2>
+      <span class="results-count" id="resultsCount"></span>
+    </div>
+    <p class="empty-hint hidden" id="noResults"></p>
+    <div class="tool-grid" id="toolGrid"></div>
+  </section>
+
+  <footer class="app-footer">
+    <p data-i18n="app.installedFooter"></p>
+  </footer>
+
+</div>
+
+<!-- Tool detail panel -->
+<div class="player-sheet tool-panel" id="toolPanel" aria-hidden="true">
+  <button class="player-sheet-close" id="toolPanelClose" aria-label="Close" data-i18n-aria="app.close">✕</button>
+  <div class="player-sheet-header">
+    <div class="station-icon tool-panel-icon" id="toolPanelIcon"></div>
+    <div class="player-sheet-info">
+      <h3 id="toolPanelTitle"></h3>
+      <p id="toolPanelDesc"></p>
+    </div>
+    <button class="favorite-button" id="toolPanelFavorite" aria-label="Favorite">★</button>
+  </div>
+  <div class="player-sheet-body" id="toolPanelBody"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="translations.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
