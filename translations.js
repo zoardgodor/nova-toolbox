@@ -1,7 +1,7 @@
 const TRANSLATIONS = {
   en: {
     "app.name": "Nova Toolbox",
-    "app.tagline": "Everyday web utilities, all in one place — no sign-up, no server, no tracking.",
+    "app.tagline": "Everyday web utilities, all in one place",
     "app.menu": "Menu",
     "app.close": "Close",
     "app.installedFooter": "Works offline once installed.",
@@ -293,7 +293,7 @@ const TRANSLATIONS = {
 
   hu: {
     "app.name": "Nova Toolbox",
-    "app.tagline": "Mindennapi webes eszközök egy helyen — regisztráció, szerver és nyomkövetés nélkül.",
+    "app.tagline": "Mindennapi webes eszközök egy helyen",
     "app.menu": "Menü",
     "app.close": "Bezárás",
     "app.installedFooter": "Telepítés után offline is működik.",

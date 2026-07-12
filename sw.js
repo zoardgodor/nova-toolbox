@@ -1,4 +1,4 @@
-const CACHE_VERSION = "nova-toolbox-v1";
+const CACHE_VERSION = "nova-toolbox-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
