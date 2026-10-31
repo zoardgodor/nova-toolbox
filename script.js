@@ -571,57 +571,29 @@ RENDERERS.hashCompare = (c) => {
   c.innerHTML = `
     <div class="compare-grid">
       <div class="field">
-        <label>${t("tool.hashCompare.valueA")}</label>
-        <textarea id="hashCompareA" spellcheck="false"></textarea>
+        <label for="hashCompareA">${t("tool.hashCompare.hashA")}</label>
+        <input type="text" id="hashCompareA" spellcheck="false" autocomplete="off" />
       </div>
       <div class="field">
-        <label>${t("tool.hashCompare.valueB")}</label>
-        <textarea id="hashCompareB" spellcheck="false"></textarea>
+        <label for="hashCompareB">${t("tool.hashCompare.hashB")}</label>
+        <input type="text" id="hashCompareB" spellcheck="false" autocomplete="off" />
       </div>
     </div>
-    <div class="field">
-      <label>${t("tool.hash.algorithm")}</label>
-      <select id="hashCompareAlgo">
-        <option value="SHA-1">SHA-1</option>
-        <option value="SHA-256" selected>SHA-256</option>
-        <option value="SHA-512">SHA-512</option>
-      </select>
-    </div>
     <div class="compare-result" id="hashCompareResult"><span class="badge info">${t("tool.hashCompare.waiting")}</span></div>
-    <div class="compare-digests">
-      <div><span class="hint">${t("tool.hashCompare.digestA")}</span><code id="hashCompareDigestA"></code></div>
-      <div><span class="hint">${t("tool.hashCompare.digestB")}</span><code id="hashCompareDigestB"></code></div>
-    </div>
-    <div class="btn-row">
-      <button class="btn primary" id="hashCompareRun">${t("action.compare")}</button>
-    </div>
   `;
 
-  async function digest(value, algorithm) {
-    const bytes = await crypto.subtle.digest(algorithm, new TextEncoder().encode(value));
-    return [...new Uint8Array(bytes)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
-  }
-
-  async function compare() {
-    const a = c.querySelector("#hashCompareA").value;
-    const b = c.querySelector("#hashCompareB").value;
-    const algorithm = c.querySelector("#hashCompareAlgo").value;
+  function compare() {
+    const a = c.querySelector("#hashCompareA").value.trim().toLowerCase();
+    const b = c.querySelector("#hashCompareB").value.trim().toLowerCase();
     const result = c.querySelector("#hashCompareResult");
     if (!a && !b) {
       result.innerHTML = `<span class="badge info">${t("tool.hashCompare.waiting")}</span>`;
-      c.querySelector("#hashCompareDigestA").textContent = "";
-      c.querySelector("#hashCompareDigestB").textContent = "";
       return;
     }
-    const [digestA, digestB] = await Promise.all([digest(a, algorithm), digest(b, algorithm)]);
-    c.querySelector("#hashCompareDigestA").textContent = digestA;
-    c.querySelector("#hashCompareDigestB").textContent = digestB;
-    const matches = digestA === digestB;
+    const matches = Boolean(a && b && a === b);
     result.innerHTML = `<span class="badge ${matches ? "success" : "danger"}">${t(matches ? "tool.hashCompare.match" : "tool.hashCompare.noMatch")}</span>`;
   }
 
-  c.querySelector("#hashCompareRun").addEventListener("click", compare);
-  c.querySelector("#hashCompareAlgo").addEventListener("change", compare);
   c.querySelector("#hashCompareA").addEventListener("input", debounce(compare, 180));
   c.querySelector("#hashCompareB").addEventListener("input", debounce(compare, 180));
 };
