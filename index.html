@@ -74,15 +74,24 @@
   <header class="header">
     <div class="top-bar">
       <button class="menu-button" id="menuButton" aria-label="Open menu" data-i18n-aria="app.menu">☰</button>
-      <h1 data-i18n="app.name">Nova Toolbox</h1>
+      <div class="brand-lockup">
+        <span class="brand-kicker">LOCAL // DEV UTILS</span>
+        <h1 data-i18n="app.name">Nova Toolbox</h1>
+      </div>
       <button class="menu-button" id="langButton" aria-label="Change language">EN</button>
     </div>
     <p data-i18n="app.tagline"></p>
+    <div class="header-meta">
+      <span><i class="status-dot"></i><span data-i18n="app.localOnly">Runs locally in your browser</span></span>
+      <span class="mono-label" data-i18n="app.toolCount">35 tools loaded</span>
+    </div>
   </header>
 
   <section class="search-panel">
     <div class="search-row">
+      <span class="search-prefix">⌕</span>
       <input type="search" id="searchInput" data-i18n-placeholder="search.placeholder" autocomplete="off" aria-label="Search tools" />
+      <kbd>/</kbd>
     </div>
     <div class="filter-row" id="categoryChips" role="tablist"></div>
   </section>
